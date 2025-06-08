@@ -78,6 +78,11 @@ go build -o lt-road-info ./cmd/lt-road-info
 - `-verbose` - Enable detailed logging
 - `-help` - Show help message
 
+### Development Tools
+
+- `make test` - Run the test suite
+- `make verify-coords` - Validate coordinate transformations with live data (see [cmd/verify-coords/README.md](cmd/verify-coords/README.md))
+
 ## 🔄 Data Sources
 
 This tool fetches data from official Lithuanian road administration systems:
