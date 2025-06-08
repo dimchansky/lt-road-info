@@ -1,0 +1,37 @@
+[
+  {
+    "layer": "EAL",
+    "name": "Test Traffic Restrictions",
+    "features": [
+      {
+        "id": "TEST:001",
+        "name": "Test Road Work",
+        "details": true,
+        "icon": "57",
+        "points": [
+          {
+            "min": 3,
+            "max": 99,
+            "point": [581234.0, 6095678.0]
+          }
+        ],
+        "restrictions": [
+          {
+            "id": "TEST:R001",
+            "icon": "76",
+            "iconValue": 50.0,
+            "lines": {
+              "paths": [
+                [
+                  [581234, 6095678],
+                  [581250, 6095690],
+                  [581280, 6095710]
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

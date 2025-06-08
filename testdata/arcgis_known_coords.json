@@ -1,0 +1,22 @@
+{
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 1,
+        "road_name": "Test Highway A1",
+        "road_number": "A1",
+        "speed_limit": 90
+      },
+      "geometry": {
+        "paths": [
+          [
+            [568123, 6062456],
+            [568140, 6062470],
+            [568160, 6062485]
+          ]
+        ]
+      }
+    }
+  ],
+  "exceededTransferLimit": false
+}

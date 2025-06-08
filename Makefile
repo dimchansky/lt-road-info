@@ -58,3 +58,16 @@ build-all:
 	GOOS=darwin GOARCH=amd64 go build -o $(BINARY_NAME)-darwin-amd64 $(MAIN_PATH)
 	GOOS=darwin GOARCH=arm64 go build -o $(BINARY_NAME)-darwin-arm64 $(MAIN_PATH)
 	GOOS=windows GOARCH=amd64 go build -o $(BINARY_NAME)-windows-amd64.exe $(MAIN_PATH)
+
+# Verify coordinate transformations are correct
+verify-coords:
+	@echo "🔍 Verifying coordinate transformations..."
+	go run ./cmd/verify-coords
+
+# Run comprehensive tests including coordinate validation
+test-all: test
+	@echo "🧪 Running coordinate transformation tests..."
+	go test ./internal/transform -v
+	@echo "🧪 Running integration tests..."
+	go test ./internal/eismoinfo -v -run TestCoordinateTransformationRegression
+	go test ./internal/arcgis -v -run TestArcGISCoordinateValidation
