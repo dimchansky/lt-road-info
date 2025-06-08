@@ -13,10 +13,10 @@ import (
 
 func main() {
 	var (
-		outputDir    = flag.String("output", ".", "Output directory for GPX files")
-		dataType     = flag.String("type", "all", "Type of data to download: all, restrictions, speed-control")
-		verbose      = flag.Bool("verbose", false, "Enable verbose logging")
-		help         = flag.Bool("help", false, "Show help message")
+		outputDir = flag.String("output", ".", "Output directory for GPX files")
+		dataType  = flag.String("type", "all", "Type of data to download: all, restrictions, speed-control")
+		verbose   = flag.Bool("verbose", false, "Enable verbose logging")
+		help      = flag.Bool("help", false, "Show help message")
 	)
 
 	flag.Parse()
@@ -55,22 +55,22 @@ func downloadAll(outputDir string) {
 func downloadRestrictions(outputDir string) {
 	outputPath := filepath.Join(outputDir, "lt-road-restrictions.gpx")
 	log.Printf("Downloading road restrictions to %s...", outputPath)
-	
+
 	if err := eismoinfo.DownloadRestrictions(outputPath); err != nil {
 		log.Fatalf("Failed to download restrictions: %v", err)
 	}
-	
+
 	log.Printf("Successfully downloaded road restrictions to %s", outputPath)
 }
 
 func downloadSpeedControl(outputDir string) {
 	outputPath := filepath.Join(outputDir, "lt-speed-control.gpx")
 	log.Printf("Downloading speed control sections to %s...", outputPath)
-	
+
 	if err := arcgis.DownloadSpeedControlSections(outputPath); err != nil {
 		log.Fatalf("Failed to download speed control sections: %v", err)
 	}
-	
+
 	log.Printf("Successfully downloaded speed control sections to %s", outputPath)
 }
 

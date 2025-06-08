@@ -17,13 +17,13 @@ func DownloadSpeedControlSections(outputPath string) error {
 func DownloadSpeedControlSectionsWithClient(httpClient *http.Client, outputPath string) error {
 	// Create data client
 	client := data.NewClient(httpClient)
-	
+
 	// Fetch data
 	features, err := client.FetchArcGISData()
 	if err != nil {
 		return err
 	}
-	
+
 	// Convert to GPX
 	return converter.ArcGISToGPX(features, outputPath)
 }

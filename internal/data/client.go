@@ -1,3 +1,4 @@
+// Package data provides HTTP clients for accessing Lithuanian road information APIs.
 package data
 
 import (
@@ -27,7 +28,7 @@ func NewClient(httpClient *http.Client) *Client {
 // FetchEALData fetches road restrictions from the EAL API
 func (c *Client) FetchEALData() ([]EALLayer, error) {
 	const url = "https://eismoinfo.lt/eismoinfo-backend/layer-dynamic-features/EAL?lks=true"
-	
+
 	resp, err := c.httpClient.Get(url)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch EAL data: %w", err)
@@ -67,7 +68,7 @@ func (c *Client) FetchArcGISData() ([]ArcGISFeature, error) {
 
 func (c *Client) getMaxRecordCount() (int, error) {
 	const baseURL = "https://gis.ktvis.lt/arcgis/rest/services/PUB/PUB_ITS/MapServer/13"
-	
+
 	resp, err := c.httpClient.Get(baseURL + "?f=json")
 	if err != nil {
 		return 0, err
@@ -109,10 +110,10 @@ func (c *Client) fetchAllArcGISFeatures(maxRecords int) ([]ArcGISFeature, error)
 
 func (c *Client) fetchArcGISFeatureBatch(offset, limit int) ([]ArcGISFeature, bool, error) {
 	const queryURL = "https://gis.ktvis.lt/arcgis/rest/services/PUB/PUB_ITS/MapServer/13/query"
-	
+
 	// Build query parameters
 	params := fmt.Sprintf("?where=1=1&outFields=*&returnGeometry=true&f=json&resultOffset=%d&resultRecordCount=%d&outSR=3346", offset, limit)
-	
+
 	resp, err := c.httpClient.Get(queryURL + params)
 	if err != nil {
 		return nil, false, err

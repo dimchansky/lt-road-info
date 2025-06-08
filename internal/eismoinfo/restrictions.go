@@ -17,14 +17,13 @@ func DownloadRestrictions(outputPath string) error {
 func DownloadRestrictionsWithClient(httpClient *http.Client, outputPath string) error {
 	// Create data client
 	client := data.NewClient(httpClient)
-	
+
 	// Fetch data
 	layers, err := client.FetchEALData()
 	if err != nil {
 		return err
 	}
-	
+
 	// Convert to GPX
 	return converter.EALToGPX(layers, outputPath)
 }
-

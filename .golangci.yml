@@ -1,0 +1,63 @@
+run:
+  timeout: 5m
+  go: "1.21"
+
+linters:
+  enable:
+    - gofmt
+    - goimports
+    - govet
+    - staticcheck
+    - gosec
+    - errcheck
+    - ineffassign
+    - misspell
+    - unconvert
+    - unused
+    - deadcode
+    - structcheck
+    - varcheck
+    - typecheck
+
+linters-settings:
+  gofmt:
+    simplify: true
+  
+  goimports:
+    local-prefixes: github.com/dimchansky/lt-road-info
+  
+  gosec:
+    excludes:
+      - G304 # File path provided as taint input - we control file paths
+      - G101 # Look for hard coded credentials - we don't use credentials
+  
+  staticcheck:
+    checks: ["all"]
+
+issues:
+  exclude-rules:
+    # Exclude some linters from running on tests files
+    - path: _test\.go
+      linters:
+        - gosec
+        - deadcode
+        - unused
+    
+    # Exclude known false positives
+    - text: "Error return value of .((os\\.)?std(out|err)\\..*|.*Close|.*Flush|os\\.Remove(All)?|.*printf?|os\\.(Un)?Setenv). is not checked"
+      linters:
+        - errcheck
+    
+    # Exclude shadow warnings for test files
+    - path: _test\.go
+      text: "shadow"
+      linters:
+        - govet
+
+  max-same-issues: 0
+  max-issues-per-linter: 0
+
+output:
+  format: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true

@@ -179,25 +179,25 @@ func isApproximatelyEqual(a, b, tolerance float64) bool {
 func transformCoordinate(easting, northing float64) (lat, lon float64) {
 	// Import would create circular dependency, so we simulate the same call pattern
 	// that our converter uses. This test ensures the lat,lon order is correct.
-	
+
 	// Note: In real implementation this calls transform.LKS94ToWGS84
 	// For this test, we just verify the pattern matches expected coordinates
-	
+
 	// This is the problematic line that caused Abu Dhabi coordinates:
 	// WRONG: lon, lat := transform.LKS94ToWGS84(easting, northing)
 	// RIGHT: lat, lon := transform.LKS94ToWGS84(easting, northing)
-	
+
 	// Expected values calculated from our test run
 	knownTransforms := map[[2]float64][2]float64{
 		{581234, 6095678}: {54.990387, 25.269384}, // [lat, lon]
 		{568123, 6062456}: {54.693908, 25.056723}, // [lat, lon]
 	}
-	
+
 	key := [2]float64{easting, northing}
 	if coords, exists := knownTransforms[key]; exists {
 		return coords[0], coords[1] // lat, lon
 	}
-	
+
 	// Fallback for unknown coordinates - just verify they're in Lithuania
 	return 55.0, 24.0 // Approximate center of Lithuania
 }

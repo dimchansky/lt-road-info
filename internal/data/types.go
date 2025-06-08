@@ -1,3 +1,4 @@
+// Package data provides types and clients for accessing Lithuanian road information APIs.
 package data
 
 // EAL (Road Restrictions) Data Types

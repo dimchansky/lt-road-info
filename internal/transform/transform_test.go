@@ -7,14 +7,14 @@ import (
 func TestLKS94ToWGS84CoordinateOrder(t *testing.T) {
 	// This test specifically prevents the lat/lon coordinate mixup bug
 	// that caused tracks to appear in Abu Dhabi instead of Lithuania
-	
+
 	testCases := []struct {
-		name          string
-		easting       float64  // LKS-94 X coordinate
-		northing      float64  // LKS-94 Y coordinate  
-		expectedLat   float64  // Expected WGS-84 latitude
-		expectedLon   float64  // Expected WGS-84 longitude
-		tolerance     float64
+		name        string
+		easting     float64 // LKS-94 X coordinate
+		northing    float64 // LKS-94 Y coordinate
+		expectedLat float64 // Expected WGS-84 latitude
+		expectedLon float64 // Expected WGS-84 longitude
+		tolerance   float64
 	}{
 		{
 			name:        "Vilnius area",
@@ -25,7 +25,7 @@ func TestLKS94ToWGS84CoordinateOrder(t *testing.T) {
 			tolerance:   0.0001,
 		},
 		{
-			name:        "Kaunas area", 
+			name:        "Kaunas area",
 			easting:     568123,
 			northing:    6062456,
 			expectedLat: 54.693908, // Lithuania latitude range
@@ -50,12 +50,12 @@ func TestLKS94ToWGS84CoordinateOrder(t *testing.T) {
 
 			// Validate specific expected values
 			if !isApproximatelyEqual(lat, tc.expectedLat, tc.tolerance) {
-				t.Errorf("❌ Expected latitude %.6f, got %.6f (diff: %.6f)", 
+				t.Errorf("❌ Expected latitude %.6f, got %.6f (diff: %.6f)",
 					tc.expectedLat, lat, abs(lat-tc.expectedLat))
 			}
 
 			if !isApproximatelyEqual(lon, tc.expectedLon, tc.tolerance) {
-				t.Errorf("❌ Expected longitude %.6f, got %.6f (diff: %.6f)", 
+				t.Errorf("❌ Expected longitude %.6f, got %.6f (diff: %.6f)",
 					tc.expectedLon, lon, abs(lon-tc.expectedLon))
 			}
 
@@ -73,7 +73,7 @@ func TestCoordinateRangeValidation(t *testing.T) {
 		northing float64
 	}{
 		{"Vilnius center", 581234, 6095678},
-		{"Kaunas center", 568123, 6062456}, 
+		{"Kaunas center", 568123, 6062456},
 		{"Klaipeda area", 317456, 6196543},
 		{"Siauliai area", 486789, 6179234},
 	}
@@ -83,13 +83,13 @@ func TestCoordinateRangeValidation(t *testing.T) {
 			lat, lon := LKS94ToWGS84(coord.easting, coord.northing)
 
 			if !isInLithuania(lat, lon) {
-				t.Errorf("❌ %s coordinates [%.6f, %.6f] are outside Lithuania", 
+				t.Errorf("❌ %s coordinates [%.6f, %.6f] are outside Lithuania",
 					coord.name, lat, lon)
 			}
 
 			// Double-check not in Abu Dhabi (our previous bug)
 			if isInAbuDhabiArea(lat, lon) {
-				t.Errorf("❌ %s coordinates [%.6f, %.6f] are in Abu Dhabi - coordinate mixup!", 
+				t.Errorf("❌ %s coordinates [%.6f, %.6f] are in Abu Dhabi - coordinate mixup!",
 					coord.name, lat, lon)
 			}
 
@@ -105,11 +105,11 @@ func TestReturnValueOrder(t *testing.T) {
 
 	// Lithuania is around 55°N, 25°E
 	// If coordinates were swapped, we'd get ~25°N, 55°E (Abu Dhabi area)
-	
+
 	if lat < 25.0 {
 		t.Errorf("❌ Latitude %.6f is too small - likely swapped with longitude", lat)
 	}
-	
+
 	if lon > 50.0 {
 		t.Errorf("❌ Longitude %.6f is too large - likely swapped with latitude", lon)
 	}
@@ -118,7 +118,7 @@ func TestReturnValueOrder(t *testing.T) {
 	if lat < 53.5 || lat > 56.5 {
 		t.Errorf("❌ Latitude %.6f is outside Lithuania range (53.5-56.5)", lat)
 	}
-	
+
 	if lon < 20.5 || lon > 27.0 {
 		t.Errorf("❌ Longitude %.6f is outside Lithuania range (20.5-27.0)", lon)
 	}

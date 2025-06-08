@@ -1,3 +1,4 @@
+// Package converter provides functions to convert Lithuanian road data to GPX format.
 package converter
 
 import (
@@ -33,7 +34,7 @@ func EALToGPX(layers []data.EALLayer, outputPath string) error {
 				// Process all paths in the restriction
 				for _, path := range restriction.Lines.Paths {
 					segment := gpx.GPXTrackSegment{}
-					
+
 					// Convert coordinates to GPX points
 					for _, coord := range path {
 						if len(coord) >= 2 {
@@ -46,12 +47,12 @@ func EALToGPX(layers []data.EALLayer, outputPath string) error {
 							})
 						}
 					}
-					
+
 					if len(segment.Points) > 0 {
 						track.Segments = append(track.Segments, segment)
 					}
 				}
-				
+
 				if len(track.Segments) > 0 {
 					gpxData.Tracks = append(gpxData.Tracks, track)
 				}
@@ -88,7 +89,7 @@ func ArcGISToGPX(features []data.ArcGISFeature, outputPath string) error {
 		// Process geometry paths
 		for _, path := range feature.Geometry.Paths {
 			segment := gpx.GPXTrackSegment{}
-			
+
 			for _, coord := range path {
 				if len(coord) >= 2 {
 					lat, lon := transform.LKS94ToWGS84(coord[0], coord[1])
@@ -100,7 +101,7 @@ func ArcGISToGPX(features []data.ArcGISFeature, outputPath string) error {
 					})
 				}
 			}
-			
+
 			if len(segment.Points) > 0 {
 				track.Segments = append(track.Segments, segment)
 			}
@@ -138,12 +139,12 @@ func getRestrictionDescription(restriction data.EALRestriction) string {
 
 func getArcGISFeatureDescription(feature data.ArcGISFeature) string {
 	var desc string
-	
+
 	// Extract relevant attributes
 	if roadName, ok := feature.Attributes["road_name"].(string); ok && roadName != "" {
 		desc = roadName
 	}
-	
+
 	if roadNum, ok := feature.Attributes["road_number"].(string); ok && roadNum != "" {
 		if desc != "" {
 			desc += " (" + roadNum + ")"
@@ -151,13 +152,13 @@ func getArcGISFeatureDescription(feature data.ArcGISFeature) string {
 			desc = "Road " + roadNum
 		}
 	}
-	
+
 	if speedLimit, ok := feature.Attributes["speed_limit"]; ok {
 		if desc != "" {
 			desc += " - "
 		}
 		desc += fmt.Sprintf("Speed limit: %v km/h", speedLimit)
 	}
-	
+
 	return desc
 }

@@ -113,7 +113,7 @@ func TestArcGISCoordinateValidation(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			// This simulates our coordinate transformation
 			// The actual call would be: lat, lon := transform.LKS94ToWGS84(tc.easting, tc.northing)
-			
+
 			// For this test, we use the known expected values
 			lat, lon := tc.expectLat, tc.expectLon
 
@@ -142,17 +142,17 @@ type arcgisMockTransport struct {
 
 func (amt *arcgisMockTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	url := req.URL.String()
-	
+
 	// Route service info requests
 	if strings.Contains(url, "MapServer/13?f=json") {
 		req.URL, _ = req.URL.Parse(amt.serviceInfoURL)
 	}
-	
+
 	// Route query requests
 	if strings.Contains(url, "MapServer/13/query") {
 		req.URL, _ = req.URL.Parse(amt.queryURL)
 	}
-	
+
 	return amt.transport.RoundTrip(req)
 }
 
