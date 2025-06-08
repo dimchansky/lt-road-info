@@ -37,7 +37,7 @@ func EALToGPX(layers []data.EALLayer, outputPath string) error {
 					// Convert coordinates to GPX points
 					for _, coord := range path {
 						if len(coord) >= 2 {
-							lon, lat := transform.LKS94ToWGS84(coord[0], coord[1])
+							lat, lon := transform.LKS94ToWGS84(coord[0], coord[1])
 							segment.Points = append(segment.Points, gpx.GPXPoint{
 								Point: gpx.Point{
 									Latitude:  lat,
@@ -91,7 +91,7 @@ func ArcGISToGPX(features []data.ArcGISFeature, outputPath string) error {
 			
 			for _, coord := range path {
 				if len(coord) >= 2 {
-					lon, lat := transform.LKS94ToWGS84(coord[0], coord[1])
+					lat, lon := transform.LKS94ToWGS84(coord[0], coord[1])
 					segment.Points = append(segment.Points, gpx.GPXPoint{
 						Point: gpx.Point{
 							Latitude:  lat,

@@ -26,7 +26,7 @@ func TestEALToGPX(t *testing.T) {
 							Lines: data.EALLines{
 								Paths: [][][]float64{
 									{
-										{532186, 6190040},
+										{532186, 6190040}, // LKS-94 coordinates: easting, northing
 										{532189, 6190044},
 										{532218, 6190080},
 									},
