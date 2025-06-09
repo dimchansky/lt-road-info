@@ -7,8 +7,8 @@ github.com/stretchr/testify v1.7.0 h1:nwc3DEeHmmLAfoZucVR881uASk0Mfjw8xYJ99tb5Cc
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/tkrajina/gpxgo v1.4.0 h1:cSD5uSwy3VZuNFieTEZLyRnuIwhonQEkGPkPGW4XNag=
 github.com/tkrajina/gpxgo v1.4.0/go.mod h1:BXSMfUAvKiEhMEXAFM2NvNsbjsSvp394mOvdcNjettg=
-github.com/wroge/wgs84/v2 v2.0.0-alpha.11 h1:wLoEsSP46vkqytAZN0Ruc+dNfCzh0X0LlOhBoGhFmgw=
-github.com/wroge/wgs84/v2 v2.0.0-alpha.11/go.mod h1:c213RWumkFVT6798bhUIDRJweu6G39v/cXT2nRYBw7w=
+github.com/wroge/wgs84/v2 v2.0.0-alpha.13 h1:PSUSlJekgecfY/+MU8xEC7DUQwOFV843iO1K3i/Mhpc=
+github.com/wroge/wgs84/v2 v2.0.0-alpha.13/go.mod h1:c213RWumkFVT6798bhUIDRJweu6G39v/cXT2nRYBw7w=
 golang.org/x/net v0.0.0-20210614182718-04defd469f4e/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
 golang.org/x/net v0.41.0 h1:vBTly1HeNPEn3wtREYfy4GZ/NECgw2Cnl+nK6Nz3uvw=
 golang.org/x/net v0.41.0/go.mod h1:B/K4NNqkfmg07DQYrbwvSluqCJOOXwUjeb/5lOisjbA=
