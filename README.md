@@ -40,7 +40,7 @@ If you want to run the tool yourself or contribute to development:
 
 ### Prerequisites
 
-- Go 1.21 or later
+- Go 1.24 or later
 - Internet connection (for fetching data from Lithuanian traffic APIs)
 
 ### Installation

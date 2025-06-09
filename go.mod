@@ -1,6 +1,6 @@
 module github.com/dimchansky/lt-road-info
 
-go 1.23.0
+go 1.24.4
 
 require (
 	github.com/tkrajina/gpxgo v1.4.0
