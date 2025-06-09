@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/tkrajina/gpxgo v1.4.0
-	github.com/wroge/wgs84/v2 v2.0.0-alpha.11
+	github.com/wroge/wgs84/v2 v2.0.0-alpha.13
 	golang.org/x/net v0.20.0
 )
 
